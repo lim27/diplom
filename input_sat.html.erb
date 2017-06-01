@@ -1,0 +1,19 @@
+<div class="block1">
+  <%= form_tag('http://localhost:3000/main/generate', method: :get)  do%>
+      <%= hidden_field_tag :subject, @subject %>
+      <%= hidden_field_tag :verb, @verb %>
+
+      <%= radio_button_tag :satel, 'across', :checked => true %> Across <br>
+      <%= radio_button_tag :satel, 'along' %> Along <br>
+      <%= radio_button_tag :satel, 'back' %> Back <br>
+      <%= radio_button_tag :satel, 'in' %> In <br>
+      <%= radio_button_tag :satel, 'down' %> Down <br>
+      <%= radio_button_tag :satel, 'into' %> Into <br>
+      <%= radio_button_tag :satel, 'out' %> Out <br>
+      <%= radio_button_tag :satel, 'through' %> Through <br>
+      <%= radio_button_tag :satel, 'up' %> Up <br>
+      <%= submit_tag "Дальше" %>
+  <% end %>
+
+
+</div>

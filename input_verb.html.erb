@@ -1,0 +1,17 @@
+<div class="block1">
+  <%= form_tag('http://localhost:3000/main/verb_inp', method: :get) do %>
+      <table>
+        <tr>
+          <td>Введите субъект </td>
+        </tr>
+        <tr>
+          <td> <%= text_field_tag :subject, @subject, :value=> "People" %> </td>
+
+        </tr>
+        <tr>
+          <td style="border: 0px"> <%= submit_tag "Далее" %> </td>
+        </tr>
+      </table>
+
+  <% end %>
+</div>

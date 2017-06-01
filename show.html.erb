@@ -1,0 +1,50 @@
+<div class="block1">
+<%= form_tag do%>
+      <table>
+        <% @statloc=0
+           @statverb=0
+        %>
+        <tr>
+          <td style="font: 16px Arial; margin: 3px;color:red; border: 0px">
+            Всего:
+          </td>
+          <td style="border: 0px">
+            <% @stats.each do |stat| %>
+                <%= stat.vsego.to_i %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 0px">
+            <% @stat_locs.each do |statloc| %>
+                <% @statloc=@statloc+statloc.kol_vo.to_i %>
+            <% end %>
+            <% @stat_verbs.each do |statverb| %>
+                <% @statverb=@statverb + statverb.kol_vo.to_i %>
+            <% end %>
+            Новое значение
+            </td>
+          <td style="border: 0px">
+            <% @vsego=@statloc + @statverb %>
+            <%= text_field :stat, :vsego, :value=> @vsego, size: 3 %>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 0px;">
+            <%= submit_tag "Обновить" %>
+          </td>
+
+        </tr>
+
+      </table>
+      <!-- <p style="border: 0px;background-color: #DADADA;
+              text-align: center;
+              background: linear-gradient(to top, #BBBBBB, #F7F7F7);
+              border: 1px solid #333;
+              width: 100px">
+        <%#= link_to "На главную", {:action=>"index"} %>
+      </p> -->
+
+<% end %>
+</div>
+

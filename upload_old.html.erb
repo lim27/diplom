@@ -1,0 +1,75 @@
+<div class="block1">
+  <table>
+    <tr>
+      <td> Предложение </td>
+      <td> Обучение </td>
+      <td> кол-во </td>
+      <!-- <td>  Локация </td> -->
+    </tr>
+    <% @verbs.each do |verb| %> <!-- таблица глаголов -->
+
+            <% str=@text.sentence.split('.') %>
+                
+            <% const = /#{verb.present.to_s}/
+            predloj=str.grep(const) %> <!-- массив ячейка - предложение -->
+            <% word=verb.present.to_s  %>
+                <% if predloj.empty? %>
+                <% else %>
+                    <%= form_tag do %>
+                <% @idverb=verb.id.to_i %>
+
+                  <% predloj.each do |znach| %> <!-- Перебор предложений, в которых есть глаголы -->
+                    <tr> <td> <%= znach.to_s %> </td>
+                      <% phrase=verb.present.to_s
+                         @const_phrase=/#{phrase}/
+                         a=predloj.grep(@const_phrase)
+                         a2=a.join('. ' +'. ')
+                         new_ar=znach.strip.split(/\s+/)
+                         rightword=new_ar.delete_if {|x| x < verb.present.to_s } # правая часть от фраз глагола
+                           @right_text=rightword
+                            phrase_right=phrase.to_s + " " + rightword.join(" ")
+                         @const_right=/#{phrase_right}/
+                      %>
+
+                      <% array_pred=predloj.grep(@const_right) %>
+                      <% @chislo=array_pred.length %>
+
+                      <% @chastotnosts.each do |stroka| %> <!-- перебор таблицы частотности-->
+                          <% @stroka_id=stroka.id_verb
+                             @stroka_text=stroka.righttext %>
+
+                      <% end %>
+                          <% #if stroka.id_verb  == @idverb and stroka.righttext == @right_text.join(" ") %>
+                          <% if @stroka_id == @idverb and @stroka_text == @right_text.join(" ") %>
+
+                              <td class="td_but"> <%= link_to "Обучить", {:action=>"edit", :id=>@stroka_id, :chislo => @chislo } %> </td>
+                              <% else %>
+                              <td class="td_but"> <%= link_to "Обучить", {:action=>"add_phrase",  :id_verb => @idverb, :righttext => @right_text, :chislo => @chislo } %> </td>
+
+                              <% end %>
+                      <%#= @stroka_id %>
+
+
+                      <td>  <%= text_field :chastotnost, :kol_vo, :value=> @chislo, :size => 2 %></td>
+                      <!-- <td> <%#= text_field :chastotnost, :id_verb, :value=> @idverb, :size => 1 %>
+                        <%#= text_field :chastotnost, :righttext, :value=> @right_text %> </td> -->
+
+
+                    </tr>
+
+                      <% end %>
+
+
+                    <% end %>
+                <% end %>
+
+    <% end %>
+    <tr>  <td class="td_but"> <%= link_to "Вернуться на главную", {:action=>"main"} %> </td> </tr>
+  </table>
+</div>
+
+
+<!--
+
+<td> <%#= text_field :chastotnost, @id_verb, :value=> @idverb %>
+<%#= text_field :chastotnost, @righttext, :value=> @right_text %> </td>-->

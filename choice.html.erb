@@ -1,0 +1,62 @@
+<div class="block1">
+
+      <% @predloj = [] %>
+
+    <% @verbs.each do |verb| %> <!-- таблица глаголов -->
+
+        <% str=@text.sentence.split('.') %>
+
+        <% const = /#{verb.present.to_s}/
+           predloj=str.grep(const)
+           @str=str
+        %> <!-- массив ячейка - предложение -->
+        <% word=verb.present.to_s  %>
+
+        <% if predloj.empty? %>
+        <% else %>
+            <%= form_tag do %>
+                <% @idverb=verb.id.to_i %>
+
+                <% predloj.each do |znach|
+                  @predloj=@predloj + predloj %> <!-- Перебор предложений, в которых есть глаголы -->
+                    <tr> <td> <%= znach.to_s %> </td>
+                      <% @phrase=verb.present.to_s
+                         @const_phrase=/#{@phrase}/
+                         a=predloj.grep(@const_phrase)
+                         a2=a.join('. ' +'. ')
+                         new_ar=znach.strip.split(/\s+/)
+                         rightword=new_ar.delete_if {|x| x < verb.present.to_s } # правая часть от фраз глагола
+                         @right_text=rightword
+                         phrase_right=@phrase.to_s + " " + rightword.join(" ")
+                         @const_right=/#{phrase_right}/
+                         @const_verb=/#{@phrase}/
+                         @verb_mot=@phrase.split(' ')
+                      %>
+                      <% rightword %>
+
+                      <% array_pred=predloj.grep(@const_right) %> <% array_verb=predloj.grep(@const_verb) %>
+                      <% @chislo_verb=array_verb.length %>
+                      <% @chislo=array_pred.length %>
+
+
+                    </tr>
+
+
+
+                <% end %>
+
+
+            <% end %>
+        <% end %>
+
+    <% end %>
+  <table>
+    <tr> <td> Статистика обновлена</td></tr>
+    <tr> <td class="td_but"> <%= link_to "Далее", {:action=>"upload",
+                                                                 :chislo_verb=>@chislo_verb, :verb_phrase => @phrase,
+                                                                 :verb_mot => @verb_mot, :id_verb => @idverb,
+                                                                 :righttext => @right_text, :chislo => @chislo } %> </td> </tr>
+
+
+  </table>
+</div>

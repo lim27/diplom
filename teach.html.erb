@@ -1,0 +1,43 @@
+<%= form_tag do %>
+    <div class="block1">
+      <% if @verb.errors.any? %>
+          <div class="error">
+
+            <ul class="err">
+              <% @verb.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+
+      <% end %>
+        <table>
+
+          <tr> <td colspan="4", style="border: 0px;"> <%= @sentence.senten.to_s %> </td> </tr>
+
+          <tr> <td colspan="4", style="border: 0px;"> Введите глагол движения </td> </tr>
+            <tr>
+              <td> Инфинитив </td>
+              <td> 2 форма гл. </td>
+              <td> 3 форма гл. </td>
+              <td> 3-е лицо </td>
+            </tr>
+
+            <tr>
+              <td> <%= text_field :verb, :present %> </td>
+              <td> <%= text_field :verb, :past_simple %> </td>
+              <td> <%= text_field :verb, :past_partic %> </td>
+              <td> <%= text_field :verb, :third_litco %> </td>
+            </tr>
+
+            <tr>
+              <td> Сателлит </td>
+            </tr>
+            <tr> <td> <%= text_field :satellite, :slovo %>  </td></tr>
+
+            <tr> <td style="border: 0px"> <%= submit_tag "Обучить" %> </td> </tr>
+
+          </table>
+
+    </div>
+<% end %>

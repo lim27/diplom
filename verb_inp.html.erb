@@ -1,0 +1,22 @@
+<div class="block1">
+  <%= form_tag('http://localhost:3000/main/generate_verb', method: :get) do %>
+      <%= hidden_field_tag :subject, @subject %>
+      <table>
+        <tr>
+          <td>Выберите глагол </td>
+
+        </tr>
+        <tr>
+          <td> <%= select(:verb,:verb, options_for_select([['go', 'go'],['come','come'],['climb','climb'],['enter', 'enter'], ['drive','drive'],
+                                                           ['drop','drop'],['fall', 'fall'],['fly','fly'],['move','move'],['ride','ride'],['roll','roll'],
+                                                           ['run','run'], ['slip','slip'],['step','step'], ['walk','walk']]))%>
+          </td>
+
+        </tr>
+        <tr>
+          <td style="border: 0px"> <%= submit_tag "Далее" %> </td>
+        </tr>
+      </table>
+
+  <% end %>
+</div>

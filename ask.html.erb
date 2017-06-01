@@ -1,0 +1,11 @@
+<div class="block1">
+  <%= form_tag do %>
+  <p> Вы уверены, что хотите обучить этому предложению? <br>
+
+      <%= text_field :newtext, :line, value: @arr_sent %> </p>
+    <%= submit_tag "Да" %>
+
+
+
+  <% end %>
+</div>

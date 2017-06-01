@@ -1,0 +1,72 @@
+<div class="block1">
+  <%= form_tag do %>
+      <table>
+      <%= hidden_field_tag :subject, @subject %>
+      <%= hidden_field_tag :satel, @satel %>
+      <%= hidden_field_tag :verb, @verb %>
+      <% @stat.each do |vsego| %>
+          <% @vsego=vsego.vsego.to_i %>
+      <% end %>
+      <% if @id_verb != 0 %>
+
+
+        <%  @chastota_loc.each do |res| %>
+        <tr>
+          <td style="border: 0px">
+            <%= @subject + " "+ @verbsatel  %>
+          </td>
+          <td style="border: 0px"> <%= res.righttext.to_s + "." %> </td>
+          <td style="border: 0px"> <% @kol_vo = res.kol_vo.to_i %>
+            <% @stat=((@kol_vo.to_f / @vsego.to_f)*100)
+               @stat= sprintf("%.2f",@stat).to_f%>
+            -
+            <%=  @stat.to_s + "%" %>
+          </td>
+        </tr>
+          <% end %>
+            <tr>  <td style="border: 0px; background-color: #DADADA;
+                    text-align: center;
+                    background: linear-gradient(to top, #BBBBBB, #F7F7F7);
+                    border: 1px solid #333;
+                    width: 300px", colspan="3">
+
+              <%= link_to "Reverse частотности", {:action=>"generate_reverse", :verbsatel => @verbsatel, :subject => @subject, :id_verb => @id_verb,:verb=> @verb, :satel => @satel} %>
+
+            </td>
+            </tr>
+
+
+          <% else %>
+            <tr> <td>   Нет такого сочетания! Попробуйте снова </td> </tr>
+
+
+
+          <% end %>
+
+
+      <tr>
+        <td style="border: 0px; background-color: #DADADA;
+                text-align: center;
+                background: linear-gradient(to top, #BBBBBB, #F7F7F7);
+                border: 1px solid #333;
+                width: 300px", colspan="3">
+
+          <%= link_to "Сгенерировать возможные предложения по глаголу + сателлит", {:action=>"input"} %>
+
+        </td>
+      </tr>
+      <tr>
+        <td style="border: 0px;background-color: #DADADA;
+                text-align: center;
+                background: linear-gradient(to top, #BBBBBB, #F7F7F7);
+                border: 1px solid #333;
+                width: 300px", colspan="3">
+
+          <%= link_to "На главную", {:action=>"index"} %>
+        </td>
+      </tr>
+      </table>
+
+
+  <% end %>
+</div>
